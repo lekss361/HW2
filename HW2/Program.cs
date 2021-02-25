@@ -9,9 +9,11 @@ namespace HW2
             int tmp1,tmp2;
             int _taskSelection;
             int _userInput1, _userInput2, _userInput3, _userInput4;
-            double _result1, _result2;
+            double _result1=0, _result2=0;
 
             string[] _numbers = new string[10] { "ноль", "один", "два", "три", "четыре", "пять", "шесть", "семь", "восемь", "девять" };
+            string[] _numbers1 = new string[10] {"десять", "одиннадцать", "двенадцать", "тринадцать", "четырнадцать", "пятнадцать", "шестьнадцать", "семнадцать", "восемнадцать", "девятнадцать" };
+            string[] _numbers2 = new string[8] {"двадцать", "тридцать", "сорок", "пятьдесят", "шестьдесят", "семьдесят", "восемьдесят", "девяносто" };
 
             Console.WriteLine("1. Пользователь вводит 2 числа(A и B).Если A > B, подсчитать A+B, если A = B, подсчитать A* B, если A < B, подсчитать A-B." +
                 "\n2. Пользователь вводит 2 числа(X и Y).Определить какой четверти принадлежит точка с координатами(X, Y)." +
@@ -73,7 +75,7 @@ namespace HW2
                     Console.Write("Введите C\nC=");
                     _userInput3 = Convert.ToInt32(Console.ReadLine());
 
-                    while (_userInput1 > _userInput2|| _userInput2 > _userInput3|| _userInput3 > _userInput1)
+                    while (_userInput1 > _userInput2|| _userInput2 > _userInput3 || _userInput3 < _userInput1)
                     {
                         if (_userInput1 > _userInput2)
                         {
@@ -87,12 +89,13 @@ namespace HW2
                             _userInput2 = _userInput3;
                             _userInput3 = tmp1;
                         }
-                        else if (_userInput3 > _userInput1)
+                        else if (_userInput3 < _userInput1)
                         {
                             tmp1 = _userInput3;
                             _userInput3 = _userInput1;
                             _userInput3 = tmp1;
                         }
+                        Console.WriteLine($"{_userInput1}{_userInput2}{_userInput3}");
                     }
                     break;
                 case (4):
@@ -104,35 +107,48 @@ namespace HW2
                     _userInput3 = Convert.ToInt32(Console.ReadLine());
 
                     tmp1 = _userInput2 * _userInput2 - 4 * _userInput1 * _userInput3;
-                    _result1 = (-_userInput2 + MathF.Sqrt(tmp1)) / 2 * _userInput1;
-                    _result1 = (-_userInput2 - MathF.Sqrt(tmp1)) / 2 * _userInput1;
+                    _result1 = (-_userInput2 + MathF.Sqrt(tmp1)) / (2 * _userInput1);
+                    _result2 = (-_userInput2 - MathF.Sqrt(tmp1)) / (2 * _userInput1);
+                    Console.WriteLine($"Корни уравнения {_result1};{_result2}");
                     break;
                 case (5):
                     Console.Write("Введите двухзначное число :");
                     _userInput1 = Convert.ToInt32(Console.ReadLine());
                     tmp1 = _userInput1 % 10;
                     tmp2 = _userInput1 / 10;
-                    if (tmp2==0&&tmp1==0)
+                    //if (tmp2==0&&tmp1==0)
+                    //{
+                    //    Console.WriteLine($"{_numbers[tmp2]} десятков {_numbers[tmp1]} единиц ");
+                    //}
+                    //else if (tmp2==0&&tmp1!=0)
+                    //{
+                    //    Console.WriteLine($"{_numbers[tmp2]} десятков {tmp1} единицы ");
+                    //}
+                    //else if (tmp2!=0&&tmp1==0)
+                    //{
+                    //    Console.WriteLine($"{_numbers[tmp2]} десятка {_numbers[tmp1]} единиц ");
+                    //}
+                    //else
+                    //{
+                    //    Console.WriteLine($"{_numbers[tmp2]} десятка {_numbers[tmp1]} единиц ");
+                    //}
+                    if (_userInput1<10)
                     {
-                        Console.WriteLine($"{_numbers[tmp2]} десятков {_numbers[tmp1]} единиц ");
+                        Console.WriteLine(_numbers[_userInput1]);
                     }
-                    else if (tmp2==0&&tmp1!=0)
+                    else if(_userInput1<20)
                     {
-                        Console.WriteLine($"{_numbers[tmp2]} десятков {tmp1} единицы ");
-                    }
-                    else if (tmp2!=0&&tmp1==0)
-                    {
-                        Console.WriteLine($"{_numbers[tmp2]} десятка {_numbers[tmp1]} единиц ");
+                        Console.WriteLine(_numbers1[tmp2]);
                     }
                     else
                     {
-                        Console.WriteLine($"{_numbers[tmp2]} десятка {_numbers[tmp1]} единицы ");
+                        Console.WriteLine($"{_numbers2[tmp2-2]} {_numbers[tmp1]}");
                     }
+                    
                     break;
                 default:
                     break;
             }
-
 
         }
     }
